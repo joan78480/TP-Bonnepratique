@@ -12,7 +12,9 @@ defmodule TpBonnePratique.AccountsFixtures do
       attrs
       |> Enum.into(%{
         address: "some address",
-        height: 42
+        height: 42,
+        astro_sign: "some astro_sign",
+        hobbbies: ["option1", "option2"]
       })
       |> TpBonnePratique.Accounts.create_user()
 

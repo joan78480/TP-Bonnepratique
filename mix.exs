@@ -62,7 +62,7 @@ defmodule TpBonnePratique.MixProject do
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
+  # Aliases are shortcu or tasks specific to the current project.
   # For example, to install project dependencies and perform other setup tasks, run:
   #
   #     $ mix setup

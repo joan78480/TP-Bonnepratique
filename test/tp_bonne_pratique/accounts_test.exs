@@ -8,7 +8,8 @@ defmodule TpBonnePratique.AccountsTest do
 
     import TpBonnePratique.AccountsFixtures
 
-    @invalid_attrs %{address: nil, height: nil}
+    @invalid_attrs %{address: nil, height: nil, astro_sign: nil, hobbbies: nil}
+    @invalid_attrs %{}
 
     test "list_users/0 returns all users" do
       user = user_fixture()
@@ -21,11 +22,13 @@ defmodule TpBonnePratique.AccountsTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      valid_attrs = %{address: "some address", height: 42}
+      valid_attrs = %{address: "some address", height: 42, astro_sign: "some astro_sign", hobbbies: ["option1", "option2"]}
 
       assert {:ok, %User{} = user} = Accounts.create_user(valid_attrs)
       assert user.address == "some address"
       assert user.height == 42
+      assert user.astro_sign == "some astro_sign"
+      assert user.hobbbies == ["option1", "option2"]
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -34,11 +37,13 @@ defmodule TpBonnePratique.AccountsTest do
 
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
-      update_attrs = %{address: "some updated address", height: 43}
+      update_attrs = %{address: "some updated address", height: 43, astro_sign: "some updated astro_sign", hobbbies: ["option1"]}
 
       assert {:ok, %User{} = user} = Accounts.update_user(user, update_attrs)
       assert user.address == "some updated address"
       assert user.height == 43
+      assert user.astro_sign == "some updated astro_sign"
+      assert user.hobbbies == ["option1"]
     end
 
     test "update_user/2 with invalid data returns error changeset" do

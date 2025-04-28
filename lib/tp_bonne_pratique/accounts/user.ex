@@ -3,6 +3,7 @@ defmodule TpBonnePratique.Accounts.User do
     Schéma définissant un User et les champs qui lui sont associés.
     User(:address, :height)
   """
+
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -17,7 +17,7 @@ permissions:
 jobs:
   build-credo:
 
-    name: Build and test
+    name: Mix credo
     runs-on: ubuntu-22.04
 
     steps:
@@ -40,7 +40,7 @@ jobs:
 
   build-test:
 
-    name: Build and test
+    name: Mix test
     runs-on: ubuntu-22.04
 
     steps:

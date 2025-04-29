@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-credo:
 
     name: Build and test
     runs-on: ubuntu-22.04
@@ -37,3 +37,52 @@ jobs:
       run: mix deps.get
     - name: Run credo
       run: mix credo
+
+  build-test:
+
+    name: Build and test
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Elixir
+      uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21 # v1.16.0
+      with:
+        elixir-version: '1.15.2' # [Required] Define the Elixir version
+        otp-version: '26.0'      # [Required] Define the Erlang/OTP version
+    - name: Restore dependencies cache
+      uses: actions/cache@v3
+      with:
+        path: deps
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-mix-
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run test
+      run: mix test
+
+  test:
+    name: Regex verif
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'  # Ou la version que tu utilises
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+
+    - name: Run tests
+      env:
+        PR_TITLE: ${{ github.event.pull_request.title }}
+      run: |
+        echo "Titre PR : $PR_TITLE"
+        python regex_verif.py ${{github.event.pull_request.title}}

@@ -86,4 +86,4 @@ jobs:
         PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
         echo "Titre PR : $PR_TITLE"
-        python regex_verif.py "$PR_TITLE"
+        python /.github/workflow/regex_verif.py "$PR_TITLE"

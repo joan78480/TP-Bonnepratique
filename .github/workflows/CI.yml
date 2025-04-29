@@ -42,6 +42,7 @@ jobs:
 
     name: Mix test
     runs-on: ubuntu-22.04
+    if: always()
 
     steps:
     - uses: actions/checkout@v4
@@ -63,7 +64,7 @@ jobs:
 
   test:
     name: Regex verif
-    if: github.event_name == 'pull_request'
+    if: always() && github.event_name == 'pull_request'
     runs-on: ubuntu-22.04
 
     steps:

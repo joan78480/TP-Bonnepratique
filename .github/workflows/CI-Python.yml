@@ -28,4 +28,4 @@ jobs:
         PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
         echo "Titre PR : $PR_TITLE"
-        pytest
+        python regex_verif.py ${{github.event.pull_request.title}}

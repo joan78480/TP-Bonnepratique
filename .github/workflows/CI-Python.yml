@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest regex_verif.py::validate_string
+        pytest ./test/regex_verif.py::validate_string

@@ -1,9 +1,6 @@
 name: Python Tests
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -30,4 +27,5 @@ jobs:
       env:
         PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
+        echo "Titre PR : $PR_TITLE"
         pytest

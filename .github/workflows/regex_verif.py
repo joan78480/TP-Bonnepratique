@@ -1,4 +1,4 @@
-import re
+import re, sys
 
 keywords = [
     "feat",
@@ -18,3 +18,6 @@ pattern = rf"^[A-Z]+-\d+\s(?:{keywords_pattern})\([^\)]+\).*$"
 
 def validate_string(s):
     return bool(re.match(pattern, s))
+
+
+validate_string(sys.argv[1])

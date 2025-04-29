@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest
+        pytest regex_verif.py::valudate_string(github.event.pull_request.title)

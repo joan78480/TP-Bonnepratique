@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: owner/repo@.github/actions/setup-elixir
+    - uses: .github/actions/setup-elixir
     - name: Run credo
       run: mix credo
 
@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: owner/repo@.github/actions/setup-elixir
+      - uses: .github/actions/setup-elixir
       - name: Run test
         run: mix test
 

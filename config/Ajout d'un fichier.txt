@@ -1,2 +1,3 @@
 test
 Pourquoi les tests ne se lancent plus ?
+test checkout

@@ -1,2 +1,1 @@
-erytrhyzth
-knzegnzrkg
+Refactoriser l'installation d'Elixir

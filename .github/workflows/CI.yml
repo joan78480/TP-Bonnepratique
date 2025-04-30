@@ -21,20 +21,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Elixir
-      uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21 # v1.16.0
-      with:
-        elixir-version: '1.15.2' # [Required] Define the Elixir version
-        otp-version: '26.0'      # [Required] Define the Erlang/OTP version
-    - name: Restore dependencies cache
-      uses: actions/cache@v3
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
+    - uses: .github/actions/setup-elixir.yml
     - name: Run credo
       run: mix credo
 
@@ -45,22 +32,10 @@ jobs:
     if: always()
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Elixir
-      uses: erlef/setup-beam@61e01a43a562a89bfc54c7f9a378ff67b03e4a21 # v1.16.0
-      with:
-        elixir-version: '1.15.2' # [Required] Define the Elixir version
-        otp-version: '26.0'      # [Required] Define the Erlang/OTP version
-    - name: Restore dependencies cache
-      uses: actions/cache@v3
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
-    - name: Run test
-      run: mix test
+      - uses: actions/checkout@v4
+      - uses: .github/actions/setup-elixir.yml
+      - name: Run test
+        run: mix test
 
   test:
     name: Regex verif
@@ -79,11 +54,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
 
     - name: Run tests
       env:
         PR_TITLE: ${{ github.event.pull_request.title }}
       run: |
-        echo "Titre PR : $PR_TITLE"
         python .github/workflows/regex_verif.py "$PR_TITLE"
